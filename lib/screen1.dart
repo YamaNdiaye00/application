@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wanker/screen2.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'main.dart';
 
 void main() {
   runApp(const screen1());
@@ -13,6 +14,7 @@ class screen1 extends StatefulWidget {
 }
 
 class _screen1State extends State<screen1> {
+  final firestore = FirebaseFirestore.instance;
   Color red1 = Colors.red.shade500;
   Color red2 = Colors.red.shade400;
   Color red3 = Colors.red.shade200;
@@ -47,6 +49,8 @@ class _screen1State extends State<screen1> {
                 children: <Widget>[
                   GestureDetector(
                     onTap: () {
+                      count++;
+                      firestore.collection("taps").add({"count": count});
                       Navigator.popAndPushNamed(
                           context, "/screen2");
                     },
